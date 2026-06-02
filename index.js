@@ -3,6 +3,13 @@
 //   keyFile: "credentials.json",
 //   scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 // });
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+    res.send("Bot is alive");
+});
+
 require("dotenv").config();
 
 const { google } = require("googleapis");
@@ -334,3 +341,8 @@ async function sendLeaderboard(chatId) {
 
     await bot.sendMessage(chatId, msg);
 }
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log("Server running on port", PORT);
+});
