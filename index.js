@@ -176,10 +176,11 @@ async function sendStandings(chatId, group) {
 
     let msg = `📊 GROUP ${group} STANDINGS\n\n`;
 
-    for (let i = 1; i < rows.length; i++) {
-        const [team, owner, pts, gd, rank] = rows[i];
+    const teams = rows.slice(2).sort((a, b) => Number(a[4]) - Number(b[4]));
 
-        msg += `${rank} | ${team} | ${owner} | ${pts} | (${gd})\n`;
+    for (let i = 0; i < teams.length; i++) {
+        const [team, owner, pts, gd] = teams[i];
+        msg += `${i + 1}. ${team} | ${owner} | ${pts} pts | (${gd})\n`;
     }
 
     bot.sendMessage(chatId, msg);
